@@ -1,7 +1,7 @@
 (function(){
 
 function ready(fn){
-  if(document.readyState !== "loading"){
+  if(document.readyState!="loading"){
     fn();
   }else{
     document.addEventListener("DOMContentLoaded",fn);
@@ -24,22 +24,18 @@ ready(function(){
 
   var closed=false;
   var shown=false;
+  var userScrolled=false;
 
 
-  // Guardar estado solo para esta entrada
   var storageKey="dxnRelatedClosed_"+location.pathname;
 
 
-
-  // Si ya fue cerrado en esta entrada no cargar
-
+  // Si ya fue cerrado en esta entrada
   if(sessionStorage.getItem(storageKey)){
     return;
   }
 
 
-
-  // Crear ventana flotante
 
   var box=document.createElement("div");
 
@@ -51,15 +47,9 @@ ready(function(){
   box.innerHTML=`
 
     <div class="dxn-rel-header">
-
       <span>📌 También te puede interesar</span>
-
-      <button id="dxn-close" aria-label="Cerrar">
-        ✖
-      </button>
-
+      <button id="dxn-close" aria-label="Cerrar">✖</button>
     </div>
-
 
     <div id="dxn-related-list"></div>
 
@@ -72,14 +62,13 @@ ready(function(){
 
 
 
-  // Callback de Blogger
-
   window.dxnRelCallback=function(json){
 
 
     if(!json.feed || !json.feed.entry){
       return;
     }
+
 
 
     var list=document.getElementById("dxn-related-list");
@@ -100,7 +89,7 @@ ready(function(){
 
       post.link.forEach(function(l){
 
-        if(l.rel==="alternate"){
+        if(l.rel=="alternate"){
           url=l.href;
         }
 
@@ -119,7 +108,6 @@ ready(function(){
           );
 
         }
-
 
 
         items.push({
@@ -192,19 +180,30 @@ ready(function(){
 
 
 
-    // Detectar llegada al final real del post-body
+    // Detectar final real del artículo
 
     window.addEventListener("scroll",function(){
 
 
-      if(closed || shown){
+
+      if(window.scrollY > 100){
+
+        userScrolled=true;
+
+      }
+
+
+
+      if(closed || shown || !userScrolled){
+
         return;
+
       }
 
 
 
       var postBottom =
-      body.offsetTop + body.offsetHeight;
+      body.getBoundingClientRect().bottom + window.scrollY;
 
 
 
@@ -213,7 +212,7 @@ ready(function(){
 
 
 
-      if(currentPosition >= postBottom - 50){
+      if(currentPosition >= postBottom - 80){
 
 
         box.style.display="block";
@@ -226,6 +225,7 @@ ready(function(){
 
 
     });
+
 
 
   };
@@ -250,12 +250,12 @@ ready(function(){
 
 
 
-  // Cerrar definitivamente en esta entrada
+  // Cerrar
 
   document.addEventListener("click",function(e){
 
 
-    if(e.target.id==="dxn-close"){
+    if(e.target.id=="dxn-close"){
 
 
       closed=true;
