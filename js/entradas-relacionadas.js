@@ -1,188 +1,234 @@
 (function(){
 
 function ready(fn){
- if(document.readyState!="loading"){
-   fn();
- }else{
-   document.addEventListener("DOMContentLoaded",fn);
- }
+  if(document.readyState!="loading"){
+    fn();
+  }else{
+    document.addEventListener("DOMContentLoaded",fn);
+  }
 }
 
 
 ready(function(){
 
-const body=document.querySelector(".post-body");
-if(!body)return;
+  const body=document.querySelector(".post-body");
+  if(!body)return;
 
 
-const labels=document.querySelectorAll(".post-labels .label-link");
-if(!labels.length)return;
+  const labels=document.querySelectorAll(".post-labels .label-link");
+  if(!labels.length)return;
 
 
-const tag=labels[0].textContent.trim();
+  const tag=labels[0].textContent.trim();
 
-let closed=false;
+  let closed=false;
 
 
-const box=document.createElement("div");
 
-box.id="dxn-related-float";
+  // Crear caja flotante
+  const box=document.createElement("div");
 
-box.style.display="none";
+  box.id="dxn-related-float";
 
-box.innerHTML=`
-<div class="dxn-rel-header">
-<span>📌 También te puede interesar</span>
-<button id="dxn-close">✖</button>
-</div>
+  box.style.display="none";
 
-<div id="dxn-related-list"></div>
-`;
+  box.innerHTML=`
+    <div class="dxn-rel-header">
+      <span>📌 También te puede interesar</span>
+      <button id="dxn-close" aria-label="Cerrar">✖</button>
+    </div>
 
+    <div id="dxn-related-list"></div>
+  `;
 
-document.body.appendChild(box);
 
+  document.body.appendChild(box);
 
 
-window.dxnRelCallback=function(json){
 
-if(!json.feed || !json.feed.entry)return;
+  // Cargar entradas relacionadas
+  window.dxnRelCallback=function(json){
 
+    if(!json.feed || !json.feed.entry)return;
 
-const list=document.getElementById("dxn-related-list");
 
-const current=location.href.split("?")[0];
+    const list=document.getElementById("dxn-related-list");
 
-let items=[];
+    const current=location.href.split("?")[0];
 
+    let items=[];
 
-json.feed.entry.forEach(post=>{
 
+    json.feed.entry.forEach(function(post){
 
-let url="";
 
-let img="https://via.placeholder.com/120x120?text=DXN";
+      let url="";
+      let img="https://via.placeholder.com/120x120?text=DXN";
 
 
-post.link.forEach(l=>{
- if(l.rel==="alternate"){
-   url=l.href;
- }
-});
+      post.link.forEach(function(l){
 
+        if(l.rel==="alternate"){
+          url=l.href;
+        }
 
-if(url && url!==current){
+      });
 
 
-if(post.media$thumbnail){
 
- img=post.media$thumbnail.url.replace(
- "s72-c",
- "s160"
- );
+      if(url && url!==current){
 
-}
 
+        if(post.media$thumbnail){
 
-items.push({
+          img=post.media$thumbnail.url.replace(
+            "s72-c",
+            "s160"
+          );
 
-t:post.title.$t,
-u:url,
-i:img
+        }
 
-});
 
+        items.push({
 
-}
+          t:post.title.$t,
+          u:url,
+          i:img
 
+        });
 
-});
 
+      }
 
-if(!items.length)return;
 
+    });
 
-items.sort(()=>Math.random()-.5);
 
-items=items.slice(0,3);
 
+    if(!items.length)return;
 
 
-let html="";
 
+    // Orden aleatorio
+    items.sort(function(){
 
-items.forEach(it=>{
+      return Math.random()-0.5;
 
-html+=`
+    });
 
-<a class="dxn-rel-item" href="${it.u}">
 
-<img class="dxn-rel-thumb"
-src="${it.i}"
-loading="lazy"
-alt="${it.t}">
+    // Mostrar solo 3
+    items=items.slice(0,3);
 
-<span class="dxn-rel-title">
-${it.t}
-</span>
 
-</a>
 
-`;
+    let html="";
 
-});
 
+    items.forEach(function(item){
 
-list.innerHTML=html;
 
+      html+=`
 
+      <a class="dxn-rel-item" href="${item.u}">
 
-const observer=new IntersectionObserver(entries=>{
+        <img 
+        class="dxn-rel-thumb"
+        src="${item.i}"
+        loading="lazy"
+        alt="${item.t}">
 
-entries.forEach(entry=>{
+        <span class="dxn-rel-title">
+        ${item.t}
+        </span>
 
-if(entry.isIntersecting && !closed){
+      </a>
 
-box.style.display="block";
+      `;
 
-observer.disconnect();
 
-}
+    });
 
-});
 
 
-},{
-threshold:0
-});
+    list.innerHTML=html;
 
 
-observer.observe(body);
 
+    /*
+       Mostrar cuando llega al FINAL
+       de la publicación
+    */
 
-};
 
+    const marker=document.createElement("div");
 
+    marker.id="dxn-related-trigger";
 
-const script=document.createElement("script");
+    body.appendChild(marker);
 
-script.src="/feeds/posts/default/-/"
-+encodeURIComponent(tag)
-+"?alt=json-in-script&callback=dxnRelCallback&max-results=8";
 
 
-document.body.appendChild(script);
+    const observer=new IntersectionObserver(function(entries){
 
+      entries.forEach(function(entry){
 
+        if(entry.isIntersecting && !closed){
 
-document.getElementById("dxn-close")
-.onclick=function(){
+          box.style.display="block";
 
-closed=true;
+          observer.disconnect();
 
-box.style.display="none";
+        }
 
-};
+      });
+
+
+    },{
+      threshold:0.1
+    });
+
+
+
+    observer.observe(marker);
+
+
+
+  };
+
+
+
+
+
+  // Solicitud de entradas relacionadas
+  const script=document.createElement("script");
+
+
+  script.src="/feeds/posts/default/-/"
+  +encodeURIComponent(tag)
+  +"?alt=json-in-script&callback=dxnRelCallback&max-results=8";
+
+
+  document.body.appendChild(script);
+
+
+
+
+
+  // Botón cerrar
+
+  document.addEventListener("click",function(e){
+
+    if(e.target.id==="dxn-close"){
+
+      closed=true;
+
+      box.style.display="none";
+
+    }
+
+  });
+
 
 
 });
