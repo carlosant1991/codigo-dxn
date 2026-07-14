@@ -86,6 +86,10 @@
   color:#0055aa;
 }
 
+#dxn-related-trigger{
+ height:1px;
+ width:100%;
+}
 
 @media(max-width:600px){
 
