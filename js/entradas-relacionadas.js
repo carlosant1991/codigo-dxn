@@ -21,8 +21,21 @@ ready(function(){
 
   var tag=labels[0].textContent.trim();
 
+
   var closed=false;
   var shown=false;
+
+
+  // Guardar estado solo para esta entrada
+  var storageKey="dxnRelatedClosed_"+location.pathname;
+
+
+
+  // Si ya fue cerrado en esta entrada no cargar
+
+  if(sessionStorage.getItem(storageKey)){
+    return;
+  }
 
 
 
@@ -34,12 +47,19 @@ ready(function(){
 
   box.style.display="none";
 
+
   box.innerHTML=`
 
     <div class="dxn-rel-header">
+
       <span>📌 También te puede interesar</span>
-      <button id="dxn-close">✖</button>
+
+      <button id="dxn-close" aria-label="Cerrar">
+        ✖
+      </button>
+
     </div>
+
 
     <div id="dxn-related-list"></div>
 
@@ -50,11 +70,16 @@ ready(function(){
 
 
 
-  // Recibir datos de Blogger
+
+
+  // Callback de Blogger
 
   window.dxnRelCallback=function(json){
 
-    if(!json.feed || !json.feed.entry) return;
+
+    if(!json.feed || !json.feed.entry){
+      return;
+    }
 
 
     var list=document.getElementById("dxn-related-list");
@@ -67,8 +92,10 @@ ready(function(){
 
     json.feed.entry.forEach(function(post){
 
+
       var url="";
       var img="https://via.placeholder.com/120x120?text=DXN";
+
 
 
       post.link.forEach(function(l){
@@ -94,6 +121,7 @@ ready(function(){
         }
 
 
+
         items.push({
 
           t:post.title.$t,
@@ -110,13 +138,15 @@ ready(function(){
 
 
 
-    if(items.length===0) return;
+    if(!items.length){
+      return;
+    }
 
 
 
     items.sort(function(){
 
-      return 0.5-Math.random();
+      return Math.random()-0.5;
 
     });
 
@@ -129,7 +159,9 @@ ready(function(){
     var html="";
 
 
+
     items.forEach(function(item){
+
 
       html+=`
 
@@ -149,6 +181,7 @@ ready(function(){
 
       `;
 
+
     });
 
 
@@ -157,20 +190,39 @@ ready(function(){
 
 
 
-    // Mostrar al llegar al final del artículo
+
+
+    // Detectar llegada al final real del post-body
 
     window.addEventListener("scroll",function(){
 
-      if(closed || shown) return;
+
+      if(closed || shown){
+        return;
+      }
 
 
-      if(body.getBoundingClientRect().bottom < window.innerHeight){
+
+      var postBottom =
+      body.offsetTop + body.offsetHeight;
+
+
+
+      var currentPosition =
+      window.scrollY + window.innerHeight;
+
+
+
+      if(currentPosition >= postBottom - 50){
+
 
         box.style.display="block";
 
         shown=true;
 
+
       }
+
 
 
     });
@@ -182,9 +234,10 @@ ready(function(){
 
 
 
-  // Solicitud de entradas relacionadas
+  // Cargar entradas relacionadas
 
   var s=document.createElement("script");
+
 
   s.src="/feeds/posts/default/-/"
   +encodeURIComponent(tag)
@@ -197,19 +250,31 @@ ready(function(){
 
 
 
-  // Cerrar ventana
+  // Cerrar definitivamente en esta entrada
 
   document.addEventListener("click",function(e){
 
+
     if(e.target.id==="dxn-close"){
+
 
       closed=true;
 
+
       box.style.display="none";
+
+
+      sessionStorage.setItem(
+        storageKey,
+        "true"
+      );
+
 
     }
 
+
   });
+
 
 
 });
