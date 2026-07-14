@@ -43,7 +43,7 @@ alt="Dr. Lim Siow Jin"
 class="dxn-avatar">
 
 <span>
-Nos visita desde <b>${ciudad}</b>
+Nos visita de <b>${ciudad}</b>
 
 <img
 src="${bandera}"
