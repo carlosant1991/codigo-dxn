@@ -1,7 +1,7 @@
 (function(){
 
 function ready(fn){
-  if(document.readyState!="loading"){
+  if(document.readyState !== "loading"){
     fn();
   }else{
     document.addEventListener("DOMContentLoaded",fn);
@@ -11,34 +11,38 @@ function ready(fn){
 
 ready(function(){
 
-  const body=document.querySelector(".post-body");
-  if(!body)return;
+  var body=document.querySelector(".post-body");
+  if(!body) return;
 
 
-  const labels=document.querySelectorAll(".post-labels .label-link");
-  if(!labels.length)return;
+  var labels=document.querySelectorAll(".post-labels .label-link");
+  if(!labels.length) return;
 
 
-  const tag=labels[0].textContent.trim();
+  var tag=labels[0].textContent.trim();
 
-  let closed=false;
+  var closed=false;
+  var shown=false;
 
 
 
-  // Crear caja flotante
-  const box=document.createElement("div");
+  // Crear ventana flotante
+
+  var box=document.createElement("div");
 
   box.id="dxn-related-float";
 
   box.style.display="none";
 
   box.innerHTML=`
+
     <div class="dxn-rel-header">
       <span>📌 También te puede interesar</span>
-      <button id="dxn-close" aria-label="Cerrar">✖</button>
+      <button id="dxn-close">✖</button>
     </div>
 
     <div id="dxn-related-list"></div>
+
   `;
 
 
@@ -46,24 +50,25 @@ ready(function(){
 
 
 
-  // Cargar entradas relacionadas
+  // Recibir datos de Blogger
+
   window.dxnRelCallback=function(json){
 
-    if(!json.feed || !json.feed.entry)return;
+    if(!json.feed || !json.feed.entry) return;
 
 
-    const list=document.getElementById("dxn-related-list");
+    var list=document.getElementById("dxn-related-list");
 
-    const current=location.href.split("?")[0];
+    var current=location.href.split("?")[0];
 
-    let items=[];
+    var items=[];
+
 
 
     json.feed.entry.forEach(function(post){
 
-
-      let url="";
-      let img="https://via.placeholder.com/120x120?text=DXN";
+      var url="";
+      var img="https://via.placeholder.com/120x120?text=DXN";
 
 
       post.link.forEach(function(l){
@@ -105,28 +110,26 @@ ready(function(){
 
 
 
-    if(!items.length)return;
+    if(items.length===0) return;
 
 
 
-    // Orden aleatorio
     items.sort(function(){
 
-      return Math.random()-0.5;
+      return 0.5-Math.random();
 
     });
 
 
-    // Mostrar solo 3
+
     items=items.slice(0,3);
 
 
 
-    let html="";
+    var html="";
 
 
     items.forEach(function(item){
-
 
       html+=`
 
@@ -146,7 +149,6 @@ ready(function(){
 
       `;
 
-
     });
 
 
@@ -155,43 +157,23 @@ ready(function(){
 
 
 
-    /*
-       Mostrar cuando llega al FINAL
-       de la publicación
-    */
+    // Mostrar al llegar al final del artículo
+
+    window.addEventListener("scroll",function(){
+
+      if(closed || shown) return;
 
 
-    const marker=document.createElement("div");
+      if(body.getBoundingClientRect().bottom < window.innerHeight){
 
-    marker.id="dxn-related-trigger";
+        box.style.display="block";
 
-    body.appendChild(marker);
+        shown=true;
 
-
-
-    const observer=new IntersectionObserver(function(entries){
-
-      entries.forEach(function(entry){
-
-        if(entry.isIntersecting && !closed){
-
-          box.style.display="block";
-
-          observer.disconnect();
-
-        }
-
-      });
+      }
 
 
-    },{
-      threshold:0.1
     });
-
-
-
-    observer.observe(marker);
-
 
 
   };
@@ -201,21 +183,21 @@ ready(function(){
 
 
   // Solicitud de entradas relacionadas
-  const script=document.createElement("script");
 
+  var s=document.createElement("script");
 
-  script.src="/feeds/posts/default/-/"
+  s.src="/feeds/posts/default/-/"
   +encodeURIComponent(tag)
   +"?alt=json-in-script&callback=dxnRelCallback&max-results=8";
 
 
-  document.body.appendChild(script);
+  document.body.appendChild(s);
 
 
 
 
 
-  // Botón cerrar
+  // Cerrar ventana
 
   document.addEventListener("click",function(e){
 
@@ -228,7 +210,6 @@ ready(function(){
     }
 
   });
-
 
 
 });
