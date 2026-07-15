@@ -54,14 +54,14 @@ alt="Dr. Lim Siow Jin">
 
 <span>
 
-Nos visita desde <b>${t}</b>
+Nos visita de <b>${t}</b>
 
 <img
 class="dxn-bandera"
 src="${o}"
 alt="Bandera">
 
-— Buenos Días
+- Buenos Días
 
 </span>
 
