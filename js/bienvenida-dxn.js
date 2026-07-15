@@ -1,75 +1,92 @@
+//<![CDATA[
 window.addEventListener("load",function(){
 
 (function(){
 
-const referrer=document.referrer;
-const host=location.hostname;
-const visitanteNuevo=!referrer||!referrer.includes(host);
+const e=document.referrer,
+      t=location.hostname,
+      n=!e||!e.includes(t);
 
-if(!visitanteNuevo||sessionStorage.getItem("mensajeDXN")) return;
+if(n&&!sessionStorage.getItem("mensajeDXN")){
 
 setTimeout(async()=>{
 
-let datos=null;
+let e=null;
 
 try{
-const r=await fetch("https://ipinfo.io/json?token=ff207427979a44");
-if(r.ok) datos=await r.json();
+
+let t=await fetch("https://ipinfo.io/json?token=ff207427979a44");
+
+if(t.ok)e=await t.json();
+
 }catch(e){}
 
-if(!datos||!datos.country){
+if(!e||!e.country){
+
 try{
-const r=await fetch("https://ipapi.co/json/");
-if(r.ok) datos=await r.json();
+
+let t=await fetch("https://ipapi.co/json/");
+
+if(t.ok)e=await t.json();
+
 }catch(e){}
+
 }
 
-const ciudad=datos?.city||"tu ciudad";
+const t=e?.city||"tu ciudad",
 
-const codigoPais=(datos?.country||datos?.country_code||navigator.language.slice(-2)||"").toLowerCase();
+n=(e?.country||e?.country_code||navigator.language.slice(-2)||"").toLowerCase(),
 
-const bandera=codigoPais
-?`https://flagcdn.com/48x36/${codigoPais}.png`
+o=n
+?`https://flagcdn.com/48x36/${n}.png`
 :"https://i.ibb.co/yhTXVZN/dxn-globe.png";
 
-const aviso=document.createElement("div");
+const a=document.createElement("div");
 
-aviso.className="dxn-bienvenida";
+a.className="dxn-bienvenida";
 
-aviso.innerHTML=`
+a.innerHTML=`
+
 <img
+class="dxn-avatar"
 src="https://i.ibb.co/B5m59WLm/datuk-lim-siow-jin.jpg"
-alt="Dr. Lim Siow Jin"
-class="dxn-avatar">
+alt="Dr. Lim Siow Jin">
 
 <span>
-Nos visita de <b>${ciudad}</b>
+
+Nos visita desde <b>${t}</b>
 
 <img
-src="${bandera}"
-alt="Bandera"
-class="dxn-bandera">
+class="dxn-bandera"
+src="${o}"
+alt="Bandera">
 
 — Buenos Días
+
 </span>
+
 `;
 
-document.body.appendChild(aviso);
+document.body.appendChild(a);
+
 
 setTimeout(()=>{
 
-aviso.style.opacity="0";
+a.style.opacity="0";
 
-setTimeout(()=>{
-aviso.remove();
-},1000);
+setTimeout(()=>a.remove(),1000);
 
 },7000);
 
+
 sessionStorage.setItem("mensajeDXN","true");
 
+
 },6500);
+
+}
 
 })();
 
 });
+//]]>
