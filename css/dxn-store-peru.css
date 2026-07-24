@@ -1,117 +1,16 @@
-/* --- Botón de tienda --- */
-                  #openStoreBtn {
-                    display:block;
-                    margin:20px auto;
-                    padding:12px 22px;
-                    background:#004AAD;
-                    color:#fff;
-                    border:none;
-                    border-radius:8px;
-                    font-size:18px;
-                    font-weight:bold;
-                    cursor:pointer;
-                    transition:all .3s;
-                    z-index:9999;
-                  }
-                  #openStoreBtn:hover { background:#003580; }
-
-                  /* --- Modal --- */
-                  .store-modal {
-                    display:none;
-                    position:fixed;
-                    top:0;left:0;width:100%;height:100%;
-                    background:rgba(0,0,0,0.6);
-                    justify-content:center;
-                    align-items:center;
-                    z-index:99999;
-                  }
-                  .store-content {
-                    background:#fff;
-                    width:90%;
-                    max-width:900px;
-                    max-height:90%;
-                    overflow-y:auto;
-                    border-radius:12px;
-                    padding:20px;
-                    position:relative;
-                  }
-                  .close-store {
-                    position:fixed;
-                    top:20px;
-                    right:calc(5% + 15px);
-                    font-size:32px;
-                    cursor:pointer;
-                    z-index:100000;
-                    background:rgba(255,255,255,0.9);
-                    width:40px;height:40px;border-radius:50%;
-                    display:flex;justify-content:center;align-items:center;
-                    box-shadow:0 2px 10px rgba(0,0,0,0.2);
-                  }
-
-                  /* --- Grid productos --- */
-                  .store-grid {
-                    display:grid;
-                    grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-                    gap:20px;
-                  }
-                  .store-item {
-                    border:1px solid #eee;
-                    border-radius:10px;
-                    padding:12px;
-                    text-align:center;
-                    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-                  }
-                  .store-item img {
-                    max-width:100%;
-                    height:auto;
-                    border-radius:8px;
-                  }
-                  .store-item h4 { margin:10px 0 6px; font-size:16px; }
-                  .store-item p { font-size:14px; color:#444; min-height:40px; }
-                  .store-item .price { font-weight:bold; color:#d32f2f; margin:6px 0; }
-
-                  /* --- Botón WhatsApp --- */
-                  .shop-whatsapp {
-                    display:inline-flex;
-                    align-items:center;
-                    justify-content:center;
-                    gap:6px;
-                    margin-top:8px;
-                    padding:8px 14px;
-                    background:#128C7E;
-                    color:#fff;
-                    border-radius:6px;
-                    text-decoration:none;
-                    font-weight:bold;
-                    transition:background .3s;
-                  }
-                  .shop-whatsapp:hover { background:#0e6e62; }
-                  .shop-whatsapp img { width:18px; height:18px; }
-
-                  /* 🔹 Botón flotante en móviles (cuando baja el scroll) */
-                  @media(max-width:768px){
-          #openStoreBtn {
-            position:fixed;
-            top:25px;
-            left:50%;
-            transform:translateX(-50%);
-            z-index:9999;
-            transition:opacity 0.3s ease, visibility 0.3s ease;
-          }
-          #openStoreBtn.hidden {
-            opacity:0;
-            visibility:hidden;
-          }
-        }
-
-                 /* 🔹 Botón escritorio flotante (cuando baja el scroll) */
-                @media(min-width:769px){
-                  #openStoreBtn.floating {
-                    position:fixed !important;
-                    bottom:53px;   /* 👈 se ubica arriba de tu otro botón flotante */
-                    left:50%;
-                    transform:translateX(-50%);
-                    z-index:9999;
-                    margin:0; /* evita espacio extra */
-                  }
-                }
+#openStoreBtn{display:block;margin:20px auto;padding:12px 22px;background:#004AAD;color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:bold;cursor:pointer;transition:all .3s;z-index:9999}
+#openStoreBtn:hover{background:#003580}
+.store-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:99999}
+.store-content{background:#fff;width:90%;max-width:900px;max-height:90%;overflow-y:auto;border-radius:12px;padding:20px;position:relative}
+.close-store{position:fixed;top:20px;right:calc(5% + 15px);font-size:32px;cursor:pointer;z-index:100000;background:rgba(255,255,255,.9);width:40px;height:40px;border-radius:50%;display:flex;justify-content:center;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+.store-item{border:1px solid #eee;border-radius:10px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.store-item img{max-width:100%;height:auto;border-radius:8px}
+.store-item h4{margin:10px 0 6px;font-size:16px}
+.store-item p{font-size:14px;color:#444;min-height:40px}
+.store-item .price{font-weight:bold;color:#d32f2f;margin:6px 0}
+.shop-whatsapp{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;padding:8px 14px;background:#128C7E;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold;transition:background .3s}
+.shop-whatsapp:hover{background:#0e6e62}
+.shop-whatsapp img{width:18px;height:18px}
+@media(max-width:768px){#openStoreBtn{position:fixed;top:25px;left:50%;transform:translateX(-50%);z-index:9999;transition:opacity .3s ease,visibility .3s ease}#openStoreBtn.hidden{opacity:0;visibility:hidden}}
+@media(min-width:769px){#openStoreBtn.floating{position:fixed!important;bottom:53px;left:50%;transform:translateX(-50%);z-index:9999;margin:0}}
