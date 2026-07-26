@@ -1,0 +1,134 @@
+#dxn-floating-counter {
+  display: block !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  clear: both !important;
+  float: none !important;
+  
+  /* Medidas exactas del contenedor */
+  width: 100% !important;
+  max-width: 340px !important;
+  margin: 35px auto !important;
+  box-sizing: border-box !important;
+  
+  /* Fondo y apariencia */
+  background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgetIEKk33o_QtvT6ui-3Aw4pAXXvsbZb6X7oAJgFVZvT826UJ6kLspHO4qtZgLi_cqIEQ5qAldZ_TEimyTZqNCzumDRmHG_iFeyPOM0kZkfIAXP1BDnutjDiGCxipLdcwZRQ1K0PAlvuqkM6HYRYfh95GBMRx7ssTlYSLH1_Yd-Sq53AF1SlXCw7vJN8l0/s470/DXN%20MLM.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2) !important;
+  text-align: center !important;
+  color: #fff !important;
+  font-family: Arial, sans-serif !important;
+  overflow: hidden !important;
+}
+
+/* --- ESTILOS PARA ESCRITORIO (Más espaciado) --- */
+@media (min-width: 769px) {
+  #dxn-floating-counter {
+    padding: 32px 22px !important; /* Más aire arriba y abajo en escritorio */
+  }
+  #dxn-floating-counter p {
+    margin: 0 0 10px 0 !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    color: #FFF !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.95) !important;
+  }
+  #dxn-counter-float {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: #FFF !important;
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+    margin: 12px 0 14px 0 !important; /* Más margen sobre y bajo el número */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-shadow: 0 3px 10px rgba(0,0,0,1) !important;
+  }
+  #dxn-floating-counter p:nth-of-type(2) {
+    margin: 12px 0 14px 0 !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    color: #D5F5E3 !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.95) !important;
+  }
+  #dxn-flags-container {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    margin-top: 10px !important;
+    min-height: 25px;
+  }
+}
+
+/* --- ESTILOS PARA MÓVILES (Mantiene lo que te convencía) --- */
+@media (max-width: 768px) {
+  #dxn-floating-counter {
+    padding: 22px 20px !important;
+  }
+  #dxn-floating-counter p {
+    margin: 0 0 6px 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    color: #FFF !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.95) !important;
+  }
+  #dxn-counter-float {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    font-size: 2.3rem !important;
+    font-weight: 700 !important;
+    color: #FFF !important;
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+    margin: 6px 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-shadow: 0 3px 10px rgba(0,0,0,1) !important;
+  }
+  #dxn-floating-counter p:nth-of-type(2) {
+    margin: 6px 0 10px 0 !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #D5F5E3 !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.95) !important;
+  }
+  #dxn-flags-container {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    margin-top: 8px !important;
+    min-height: 22px;
+  }
+}
+
+#dxn-counter-float span {
+  display: inline-block !important;
+  min-width: 12px !important;
+  text-align: center !important;
+}
+
+@media (max-width: 380px) {
+  #dxn-floating-counter {
+    max-width: 92% !important;
+    padding: 18px 12px !important;
+  }
+  #dxn-counter-float {
+    font-size: 1.95rem !important;
+  }
+}
