@@ -1,104 +1,73 @@
-window.addEventListener("load", function () {
-  const e = {
+(function () {
+  const config = {
     numeroInicial: 20109717,
     fechaInicio: new Date("2025-08-01T05:00:00Z"),
     crecimientoBasePorHora: 208,
     paises: ["MY", "PE", "BO", "MX", "IN", "PH", "TH"]
   };
 
-  function n() {
-    const n = document.getElementById("dxn-flags-container");
-    if (!n || n.children.length > 0) return; // Evita duplicar banderas
-    const t = window.innerWidth <= 768 ? "32px" : "40px";
-    e.paises.forEach(e => {
-      const o = document.createElement("img");
-      o.src = `https://flagcdn.com/w40/${e.toLowerCase()}.png`;
-      o.alt = `Bandera ${e}`;
-      o.style.width = t;
-      o.style.height = "auto";
-      o.style.borderRadius = "4px";
-      o.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
-      n.appendChild(o);
+  let ejecutado = false;
+
+  function cargarBanderas() {
+    const contenedor = document.getElementById("dxn-flags-container");
+    if (!contenedor || contenedor.children.length > 0) return;
+    const tamano = window.innerWidth <= 768 ? "28px" : "34px";
+    config.paises.forEach(pais => {
+      const img = document.createElement("img");
+      img.src = `https://flagcdn.com/w40/${pais.toLowerCase()}.png`;
+      img.alt = `Bandera ${pais}`;
+      img.style.width = tamano;
+      img.style.height = "auto";
+      img.style.borderRadius = "3px";
+      img.style.boxShadow = "0 2px 4px rgba(0,0,0,0.15)";
+      contenedor.appendChild(img);
     });
   }
 
-  function o() {
-    const n = new Date(), r = new Date(n.getTime() + 5 * 60 * 60 * 1e3);
-    const c = (r.getFullYear() - e.fechaInicio.getUTCFullYear()) * 12 + (r.getUTCMonth() - e.fechaInicio.getUTCMonth());
-    const s = e.crecimientoBasePorHora + c;
-    const d = Math.floor(e.numeroInicial + ((r - e.fechaInicio) / 36e5) * s);
-    const l = document.getElementById("dxn-counter-float");
-    if (!l) return;
-    
-    let f = d - 1e3;
-    const h = Math.ceil((d - f) / 30);
-    let p;
+  function iniciarContador() {
+    const ahora = new Date();
+    const fechaAjustada = new Date(ahora.getTime() + 5 * 60 * 60 * 1000);
+    const meses = (fechaAjustada.getFullYear() - config.fechaInicio.getUTCFullYear()) * 12 + (fechaAjustada.getUTCMonth() - config.fechaInicio.getUTCMonth());
+    const tasa = config.crecimientoBasePorHora + meses;
+    const valorFinal = Math.floor(config.numeroInicial + ((fechaAjustada - config.fechaInicio) / 3600000) * tasa);
+    const contenedor = document.getElementById("dxn-counter-float");
+    if (!contenedor) return;
 
-    function u() {
-      f = Math.min(f + h, d);
-      l.innerHTML = "";
-      f.toString().split("").forEach(e => {
-        const n = document.createElement("span");
-        n.textContent = e;
-        l.appendChild(n);
+    let actual = valorFinal - 1000;
+    const paso = Math.ceil((valorFinal - actual) / 30);
+
+    const intervalo = setInterval(() => {
+      actual = Math.min(actual + paso, valorFinal);
+      contenedor.innerHTML = "";
+      actual.toString().split("").forEach(digito => {
+        const span = document.createElement("span");
+        span.textContent = digito;
+        contenedor.appendChild(span);
       });
-      if (f >= d) clearInterval(p);
+      if (actual >= valorFinal) clearInterval(intervalo);
+    }, 40);
+  }
+
+  function activar() {
+    if (ejecutado) return;
+    ejecutado = true;
+    cargarBanderas();
+    iniciarContador();
+  }
+
+  function comprobar() {
+    const box = document.getElementById("dxn-floating-counter");
+    if (!box || ejecutado) return;
+
+    const rect = box.getBoundingClientRect();
+    const altoPantalla = window.innerHeight || document.documentElement.clientHeight;
+
+    if (rect.top < altoPantalla && rect.bottom > 0) {
+      activar();
     }
-    p = setInterval(u, 50);
   }
 
-  function i() {
-    const t = document.getElementById("dxn-floating-counter");
-    if (!t) return;
-
-    if (window.innerWidth <= 768) {
-      t.style.width = "90%";
-      t.style.top = "50%";
-      t.style.left = "50%";
-      t.style.transform = "translate(-50%,-50%)";
-    } else {
-      t.style.width = "35%";
-      t.style.maxWidth = "420px";
-      t.style.top = "60%";
-      t.style.left = "50%";
-      t.style.transform = "translate(-50%,-50%)";
-    }
-    t.style.display = "block";
-    t.style.opacity = "1";
-    
-    n();
-    o();
-  }
-
-  // --- Detección del final de la entrada ---
-  // Crea un marcador invisible al final del artículo si no existe uno
-  let endMarker = document.getElementById("dxn-end-of-post");
-  if (!endMarker) {
-    endMarker = document.createElement("div");
-    endMarker.id = "dxn-end-of-post";
-    document.body.appendChild(endMarker); // Se añade al final del HTML o de tu contenedor principal
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        i();
-        observer.disconnect(); // Se activa solo una vez
-      }
-    });
-  }, { threshold: 0.1 });
-
-  observer.observe(endMarker);
-
-  // Evento para el botón de cerrar (por si el usuario decide ocultarlo manualmente)
-  const closeBtn = document.getElementById("close-counter");
-  if (closeBtn) {
-    closeBtn.addEventListener("click", function () {
-      const e = document.getElementById("dxn-floating-counter");
-      if (e) {
-        e.style.opacity = "0";
-        setTimeout(() => e.style.display = "none", 500);
-      }
-    });
-  }
-});
+  window.addEventListener("scroll", comprobar);
+  window.addEventListener("resize", comprobar);
+  setTimeout(comprobar, 200);
+})();
