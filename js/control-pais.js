@@ -135,8 +135,7 @@
         bandera +
         " <b>Registro Online disponible en " +
         nombrePais +
-        "</b><br>" +
-        "Puedes completar tu registro online en DXN.";
+        "</b>";
 
     } else {
 
