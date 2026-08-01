@@ -1,0 +1,81 @@
+/* =========================
+   BOTÓN FLOTANTE WHATSAPP DXN
+========================= */
+
+#chat-dxn-btn{
+  position:fixed;
+  bottom:82px;
+  right:13px;
+  z-index:9999;
+  background:#25D366;
+  color:#fff;
+  width:50px;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  box-shadow:0 4px 15px rgba(0,0,0,.25);
+  cursor:pointer;
+  animation:whatsapp-pulse 2s infinite;
+  transition:transform .3s ease,background .3s ease;
+}
+
+#chat-dxn-btn:hover{
+  transform:scale(1.1);
+  background:#20bd5a;
+}
+
+
+/* =========================
+   MENÚ WHATSAPP
+========================= */
+
+#chat-dxn-menu{
+  display:none;
+  position:fixed;
+  bottom:130px;
+  right:20px;
+  z-index:9998;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  overflow:hidden;
+  font-size:15px;
+  width:220px;
+}
+
+#chat-dxn-menu a{
+  display:block;
+  padding:12px 16px;
+  color:#333;
+  text-decoration:none;
+  border-bottom:1px solid #eee;
+}
+
+#chat-dxn-menu a:last-child{
+  border-bottom:none;
+}
+
+#chat-dxn-menu a:hover{
+  background:#f5f5f5;
+}
+
+
+/* =========================
+   ANIMACIÓN PULSO WHATSAPP
+========================= */
+
+@keyframes whatsapp-pulse{
+  0%{
+    box-shadow:0 0 0 0 rgba(37,211,102,.7);
+  }
+
+  70%{
+    box-shadow:0 0 0 15px rgba(37,211,102,0);
+  }
+
+  100%{
+    box-shadow:0 0 0 0 rgba(37,211,102,0);
+  }
+}
