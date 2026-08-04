@@ -1,0 +1,265 @@
+/* =========================================================
+   PROMOCIÓN DXN AGOSTO 2026
+   Carrusel promocional
+   ========================================================= */
+
+#promo-dxn-agosto-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0,0,0,.72);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .35s ease, visibility .35s ease;
+  box-sizing: border-box;
+}
+
+#promo-dxn-agosto-overlay.promo-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#promo-dxn-agosto-modal {
+  position: relative;
+  width: min(920px, 100%);
+  max-height: calc(100vh - 40px);
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0,0,0,.35);
+  transform: translateY(20px) scale(.97);
+  transition: transform .35s ease;
+}
+
+#promo-dxn-agosto-overlay.promo-visible #promo-dxn-agosto-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Botón cerrar */
+
+#promo-dxn-agosto-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  font-size: 26px;
+  line-height: 38px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+
+#promo-dxn-agosto-close:hover {
+  transform: scale(1.08);
+  background: rgba(0,0,0,.85);
+}
+
+/* Contenedor del carrusel */
+
+#promo-dxn-agosto-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Cada diapositiva */
+
+.promo-dxn-slide {
+  display: none;
+  width: 100%;
+  text-align: center;
+}
+
+.promo-dxn-slide.promo-slide-active {
+  display: block;
+  animation: promoDxnFade .5s ease;
+}
+
+@keyframes promoDxnFade {
+  from {
+    opacity: .2;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Imagen */
+
+.promo-dxn-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Flechas */
+
+.promo-dxn-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: 30px;
+  line-height: 38px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.promo-dxn-arrow:hover {
+  background: rgba(0,0,0,.8);
+}
+
+.promo-dxn-prev {
+  left: 12px;
+}
+
+.promo-dxn-next {
+  right: 12px;
+}
+
+/* Indicadores */
+
+#promo-dxn-agosto-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0 4px;
+  background: #fff;
+}
+
+.promo-dxn-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #bbb;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.promo-dxn-dot.promo-dot-active {
+  background: #0066b3;
+  transform: scale(1.3);
+}
+
+/* Información */
+
+#promo-dxn-agosto-info {
+  padding: 10px 20px 18px;
+  background: #fff;
+  text-align: center;
+}
+
+#promo-dxn-agosto-info h3 {
+  margin: 6px 0 12px;
+  color: #003366;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+#promo-dxn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 22px;
+  border-radius: 8px;
+  background: #25d366;
+  color: #fff !important;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-sizing: border-box;
+  transition: transform .2s ease, filter .2s ease;
+}
+
+#promo-dxn-whatsapp:hover {
+  transform: translateY(-2px);
+  filter: brightness(.95);
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+
+  #promo-dxn-agosto-overlay {
+    padding: 10px;
+  }
+
+  #promo-dxn-agosto-modal {
+    max-height: calc(100vh - 20px);
+    border-radius: 10px;
+  }
+
+  #promo-dxn-agosto-close {
+    top: 7px;
+    right: 7px;
+    width: 34px;
+    height: 34px;
+    font-size: 23px;
+    line-height: 34px;
+  }
+
+  .promo-dxn-slide img {
+    max-height: 62vh;
+    object-fit: contain;
+  }
+
+  .promo-dxn-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 25px;
+    line-height: 32px;
+  }
+
+  .promo-dxn-prev {
+    left: 7px;
+  }
+
+  .promo-dxn-next {
+    right: 7px;
+  }
+
+  #promo-dxn-agosto-info {
+    padding: 8px 12px 14px;
+  }
+
+  #promo-dxn-agosto-info h3 {
+    font-size: 16px;
+    margin: 5px 0 10px;
+  }
+
+  #promo-dxn-whatsapp {
+    width: 100%;
+    max-width: 300px;
+    font-size: 15px;
+  }
+
+}
