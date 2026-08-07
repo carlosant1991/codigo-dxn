@@ -1,1 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Generador Índice DXN</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f5f5;
+}
+
+.container{
+
+    max-width:850px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+h1{
+
+    margin-top:0;
+    color:#004AAD;
+
+}
+
+button{
+
+    background:#004AAD;
+    color:#fff;
+    border:0;
+    padding:15px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+
+}
+
+button:hover{
+
+    background:#00337a;
+
+}
+
+.progress{
+
+    width:100%;
+    height:25px;
+    background:#ddd;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:25px;
+
+}
+
+.progress span{
+
+    display:block;
+    height:100%;
+    width:0%;
+    background:#28a745;
+    transition:.3s;
+
+}
+
+#estado{
+
+    margin-top:20px;
+    font-weight:bold;
+
+}
+
+#resultado{
+
+    margin-top:25px;
+    white-space:pre-wrap;
+    font-size:14px;
+    background:#f8f8f8;
+    padding:15px;
+    border-radius:8px;
+    max-height:350px;
+    overflow:auto;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🤖 Generador Índice DXN</h1>
+
+<p>
+
+Blog:
+
+<br>
+
+<strong>
+
+https://dxnganodomicz.blogspot.com
+
+</strong>
+
+</p>
+
+<button id="btnGenerar">
+
+Leer Feed
+
+</button>
+
+<div class="progress">
+
+<span id="barra"></span>
+
+</div>
+
+<div id="estado">
+
+Esperando...
+
+</div>
+
+<div id="resultado">
+
+</div>
+
+</div>
+
+<script>
+
+const BLOG="https://dxnganodomicz.blogspot.com";
+
+const MAX=150;
+
+let totalEntradas=0;
+
+let entradas=[];
+
+async function obtenerFeed(start){
+
+    const url=
+
+`${BLOG}/feeds/posts/default?alt=json&max-results=${MAX}&start-index=${start}`;
+
+    const r=await fetch(url);
+
+    return await r.json();
+
+}
+
+async function comenzar(){
+
+    document.getElementById("resultado").textContent="";
+
+    entradas=[];
+
+    document.getElementById("estado").textContent="Leyendo blog...";
+
+    document.getElementById("barra").style.width="0%";
+
+    let inicio=1;
+
+    let terminado=false;
+
+    while(!terminado){
+
+        const json=await obtenerFeed(inicio);
+
+        if(!json.feed.entry){
+
+            terminado=true;
+
+            break;
+
+        }
+
+        entradas=entradas.concat(json.feed.entry);
+
+        inicio+=MAX;
+
+        totalEntradas=entradas.length;
+
+        document.getElementById("estado").textContent=
+
+        "Entradas leídas: "+totalEntradas;
+
+        let porcentaje=Math.min((totalEntradas/500)*100,100);
+
+        document.getElementById("barra").style.width=porcentaje+"%";
+
+    }
+
+    document.getElementById("barra").style.width="100%";
+
+    document.getElementById("estado").textContent=
+
+    "Proceso terminado";
+
+    document.getElementById("resultado").textContent=
+
+`Entradas encontradas:
+
+${entradas.length}
+
+--------------------------------------
+
+Primer artículo:
+
+${entradas[0].title.$t}
+
+Último artículo:
+
+${entradas[entradas.length-1].title.$t}`;
+
+}
+
+document
+
+.getElementById("btnGenerar")
+
+.addEventListener("click",comenzar);
+
+</script>
+
+</body>
+</html>
