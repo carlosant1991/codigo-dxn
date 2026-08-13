@@ -31,7 +31,7 @@ SK:{nombre:"Eslovaquia",url:"https://drive.google.com/file/d/1f-c_JAb7sQHe1Hnd1t
 NZ:{nombre:"Nueva Zelanda",url:"https://drive.google.com/file/d/1zdx-Li7pXrfVc6Bw6zqnIxrHO10k5S-l/preview"},
 AU:{nombre:"Australia",url:"https://drive.google.com/file/d/1wZPk1mEK5BANQ1uVOWVJFlubigXO2qF1/preview"},
 TR:{nombre:"Turquía",url:"https://drive.google.com/file/d/1axvMsoKPPAZfb6A9twklLnlmXMOAWEJQ/preview"},
-IN:{nombre:"India",url:"https://drive.google.com/file/d/1KJiMe68ZXdBK1FXiY1WspZOJEEHHa4j0/preview"},
+IN:{nombre:"India",url:"https://drive.google.com/file/d/1G8QEexK_30B4vPWyJlhicxetBp2rRGyU/preview"},
 NO:{nombre:"Noruega",url:"https://drive.google.com/file/d/1QtGDvDWrYyCGULxD1JLBMlxtW7K7KQJB/preview"},
 DE:{nombre:"Alemania",url:"https://drive.google.com/file/d/1rg8VnUQBxt8I1jEEd57TQJtLW40oYoH-/preview"},
 EG:{nombre:"Egipto",url:"https://drive.google.com/file/d/1vm8oVKir7XqPs4KDiQ30hn-R2skMTOje/preview"}
