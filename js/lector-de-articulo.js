@@ -79,23 +79,26 @@ function iniciarLector(){
 
   function detectarIdioma(texto){
     var palabras={
-      es:["el","la","los","las","que","de","para","con","una","este","esta","del","por","como","una"],
-      en:["the","and","that","for","with","this","from","are","you","is","of","to","how","was"],
-      pt:["o","a","os","as","que","de","para","com","uma","este","esta","do","por","como"],
-      fr:["le","la","les","des","que","pour","avec","une","est","dans","du","et","comme"],
-      de:["der","die","das","und","für","mit","eine","ist","den","von","zu","wie"],
-      it:["il","la","gli","che","per","con","una","questo","sono","del","di","come"]
+      es:["el","la","los","las","que","de","para","con","una","este","esta","del","por","como","sobre","entre","también"],
+      en:["the","and","that","for","with","this","from","are","you","is","of","to","how","was","about","between","also"],
+      pt:["o","a","os","as","que","de","para","com","uma","este","esta","do","por","como","sobre","entre","também"],
+      fr:["le","la","les","des","que","pour","avec","une","est","dans","du","et","comme","sur","entre","aussi"],
+      de:["der","die","das","und","für","mit","eine","ist","den","von","zu","wie","über","zwischen","auch"],
+      it:["il","la","gli","che","per","con","una","questo","sono","del","di","come","sul","tra","anche"]
     };
 
     var limpio=texto.toLowerCase(),
-        resultado="es",
+        resultado="",
         mayor=0;
 
     Object.keys(palabras).forEach(function(idioma){
       var puntos=0;
 
       palabras[idioma].forEach(function(palabra){
-        var coincidencias=limpio.match(new RegExp("\\b"+palabra+"\\b","g"));
+        var coincidencias=limpio.match(
+          new RegExp("\\b"+palabra+"\\b","g")
+        );
+
         if(coincidencias)puntos+=coincidencias.length;
       });
 
@@ -105,27 +108,66 @@ function iniciarLector(){
       }
     });
 
-    return resultado;
+    return mayor>=3?resultado:"";
+  }
+
+  function idiomaNavegador(){
+    var idioma=(navigator.language||"").toLowerCase();
+
+    if(!idioma)return"";
+
+    idioma=idioma.split("-")[0];
+
+    return["es","en","pt","fr","de","it"].indexOf(idioma)>-1
+      ?idioma
+      :"";
+  }
+
+  function seleccionarVoz(idioma){
+    var voces=synth.getVoices();
+
+    if(!voces.length||!idioma)return null;
+
+    var exactas=voces.filter(function(v){
+      return v.lang&&v.lang.toLowerCase()===idioma;
+    });
+
+    if(exactas.length){
+      return exactas.find(function(v){
+        return v.default;
+      })||exactas[0];
+    }
+
+    var compatibles=voces.filter(function(v){
+      return v.lang&&
+        v.lang.toLowerCase().split("-")[0]===idioma;
+    });
+
+    if(compatibles.length){
+      return compatibles.find(function(v){
+        return v.default;
+      })||compatibles[0];
+    }
+
+    return null;
   }
 
   function cargarVoz(){
-    var voces=synth.getVoices();
-    if(!voces.length)return;
+    var texto=obtenerTexto(),
+        idioma=detectarIdioma(texto);
 
-    var idioma=detectarIdioma(obtenerTexto()),
-        compatibles=voces.filter(function(v){
-          return v.lang&&v.lang.toLowerCase().split("-")[0]===idioma;
-        });
-
-    if(compatibles.length){
-      voz=compatibles.find(function(v){
-        return v.default;
-      })||compatibles[0];
-    }else{
-      voz=voces.find(function(v){
-        return v.default;
-      })||voces[0];
+    if(!idioma){
+      idioma=idiomaNavegador();
     }
+
+    if(!idioma){
+      voz=null;
+      return false;
+    }
+
+    voz=seleccionarVoz(idioma);
+
+    return!!voz;
   }
 
   function preparar(){
@@ -138,7 +180,13 @@ function iniciarLector(){
 
     fragmentos=dividirTexto(texto);
     indice=0;
+
     cargarVoz();
+
+    if(!voz){
+      estado.textContent="No hay una voz disponible para este idioma";
+      return false;
+    }
 
     return fragmentos.length>0;
   }
@@ -233,7 +281,9 @@ function iniciarLector(){
   });
 
   if("onvoiceschanged" in synth){
-    synth.onvoiceschanged=cargarVoz;
+    synth.onvoiceschanged=function(){
+      if(!voz)cargarVoz();
+    };
   }
 
   cargarVoz();
