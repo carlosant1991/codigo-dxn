@@ -13,13 +13,13 @@
     "GL","GD","GP","GU","GT","GG","GN","GW","GY","HT","HM","VA","HN","HK","HU","IS",
     "IN","ID","IQ","IE","IM","IL","IT","CI","JM","JP","JE","JO","KZ","KE","KI","KR",
     "XK","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MO","AN","MK","MG",
-    "MW","MY","MV","ML","MT","MH","MQ","MR","MU","YT","MX","FM","MD","MC","MN","ME",
-    "MS","MA","MZ","NA","NR","NL","NC","NZ","NI","NE","NG","NU","NF","MP","NO","OM",
-    "PK","PW","PS","PA","PG","PY","PE","PH","PN","PL","PT","PR","QA","RE","RO","RW",
-    "BL","SH","KN","LC","MF","PM","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG",
-    "SK","SI","SB","SO","ZA","GS","SS","ES","LK","SD","SR","SJ","SZ","SE","CH","SY",
-    "TW","TJ","TZ","TH","TL","TG","TK","TO","TT","TN","TR","TM","TC","TV","UG","UA",
-    "AE","GB","US","UY","UZ","VU","VE","VN","VG","VI","WF","YE","ZM","ZW"
+    "MW","MY","MV","ML","MT","MH","MQ","MR","MU","YT","FM","MD","MC","MN","ME","MS",
+    "MA","MZ","NA","NR","NL","NC","NZ","NI","NE","NG","NU","NF","MP","NO","OM","PK",
+    "PW","PS","PA","PG","PY","PE","PH","PN","PL","PT","PR","QA","RE","RO","RW","BL",
+    "SH","KN","LC","MF","PM","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK",
+    "SI","SB","SO","ZA","GS","SS","ES","LK","SD","SR","SJ","SZ","SE","CH","SY","TW",
+    "TJ","TZ","TH","TL","TG","TK","TO","TT","TN","TR","TM","TC","TV","UG","UA","AE",
+    "GB","US","UY","UZ","VU","VE","VN","VG","VI","WF","YE","ZM","ZW"
   ]);
 
   // ==========================================
