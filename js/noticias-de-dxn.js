@@ -20,7 +20,7 @@ function mostrarMensaje(texto){
 function mostrarNoticias(noticias){
 
   if(!noticias.length){
-    mostrarMensaje('No hay noticias actualizadas');
+    mostrarMensaje('No hay noticias disponibles');
     return;
   }
 
@@ -32,21 +32,16 @@ function mostrarNoticias(noticias){
       '<a class="dxn-news-item" href="'+
       noticia.url+
       '" target="_blank" rel="noopener">'+
-
       '<span class="dxn-news-type">['+
       noticia.tipo+
       ']</span>'+
-
       '<span class="dxn-news-title">'+
       noticia.titulo+
       '</span>'+
-
       (noticia.fecha?
-      '<span class="dxn-news-date">· '+
+      '<span class="dxn-news-date"> · '+
       noticia.fecha+
-      '</span>':
-      '')+
-
+      '</span>':'')+
       '</a>';
 
   });
@@ -75,7 +70,9 @@ function cargarNoticias(pais){
     var todas=data.noticias||[];
 
     var noticiasPais=todas.filter(function(noticia){
+
       return String(noticia.pais||'').toUpperCase()===pais;
+
     });
 
     mostrarNoticias(noticiasPais);
@@ -85,7 +82,7 @@ function cargarNoticias(pais){
 
     console.warn('Noticias DXN:',error);
 
-    mostrarMensaje('No hay noticias actualizadas');
+    mostrarMensaje('No hay noticias disponibles');
 
   });
 
@@ -118,15 +115,12 @@ function iniciar(){
   detectarPais()
   .then(function(pais){
 
-    if(pais==='PE'){
-
-      cargarNoticias(pais);
-
-    }else{
-
+    if(!pais){
       mostrarMensaje('No hay noticias disponibles');
-
+      return;
     }
+
+    cargarNoticias(pais);
 
   })
   .catch(function(error){
@@ -138,18 +132,6 @@ function iniciar(){
   });
 
 }
-
-track.addEventListener('touchstart',function(){
-
-  track.style.animationPlayState='paused';
-
-},{passive:true});
-
-track.addEventListener('touchend',function(){
-
-  track.style.animationPlayState='';
-
-},{passive:true});
 
 iniciar();
 
