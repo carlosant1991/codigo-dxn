@@ -1,0 +1,25 @@
+{
+  "noticias": [
+    {
+      "pais": "PE",
+      "tipo": "NOTICIAS",
+      "titulo": "Fábrica de DXN Perú en Chilca",
+      "fecha": "15 Set 2025",
+      "url": "https://www.facebook.com/share/p/1BfnnL4Kin/"
+    },
+    {
+      "pais": "PE",
+      "tipo": "EVENTOS",
+      "titulo": "16 Aniversario de DXN Perú",
+      "fecha": "20 Set 2026",
+      "url": "https://www.facebook.com/share/1GuTnHQwvQ/"
+    },
+    {
+      "pais": "PE",
+      "tipo": "AVISO",
+      "titulo": "Ajuste de Precios a partir del 01 Septiembre 2026",
+      "fecha": "25 Ago 2026",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+    }
+  ]
+}
