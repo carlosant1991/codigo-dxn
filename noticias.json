@@ -3,22 +3,39 @@
     {
       "pais": "PE",
       "tipo": "NOTICIAS",
-      "titulo": "Fábrica de DXN Perú en Chilca",
-      "fecha": "15 Set 2025",
-      "url": "https://www.facebook.com/share/p/1BfnnL4Kin/"
-    },
-    {
-      "pais": "PE",
-      "tipo": "EVENTOS",
-      "titulo": "16 Aniversario de DXN Perú",
-      "fecha": "20 Set 2026",
-      "url": "https://www.facebook.com/share/1GuTnHQwvQ/"
+      "titulo": "Comunicado Oficial de DXN",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
     },
     {
       "pais": "PE",
       "tipo": "AVISO",
-      "titulo": "Ajuste de Precios a partir del 01 Septiembre 2026",
-      "fecha": "25 Ago 2026",
+      "titulo": "¡AVISO IMPORTANTE!",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+    },
+    {
+      "pais": "PE",
+      "tipo": "NOTICIAS",
+      "titulo": "Incentivo de Teléfono Celular en Efectivo",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+    },
+    {
+      "pais": "PE",
+      "tipo": "NOTICIAS",
+      "titulo": "Prohibición de Negocios con los Países Sancionados",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+    },
+    {
+      "pais": "PE",
+      "tipo": "EVENTOS",
+      "titulo": "16 Aniversario DXN Perú",
+      "fecha": "20 Sep 2026",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+    },
+    {
+      "pais": "PE",
+      "tipo": "EVENTOS",
+      "titulo": "Camp EVOLUCIONA Brasil 2027",
+      "fecha": "11 Ene 2027",
       "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
     }
   ]
