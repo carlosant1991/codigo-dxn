@@ -3,40 +3,40 @@
     {
       "pais": "PE",
       "tipo": "NOTICIAS",
-      "titulo": "Comunicado Oficial de DXN",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+      "titulo": "Viajes de Incentivo ITSI",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#itsi"
     },
     {
       "pais": "PE",
       "tipo": "AVISO",
-      "titulo": "¡AVISO IMPORTANTE!",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+      "titulo": "¡COMUNICADO OFICIAL!",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#news"
     },
     {
       "pais": "PE",
       "tipo": "NOTICIAS",
       "titulo": "Incentivo de Teléfono Celular en Efectivo",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#news"
     },
     {
       "pais": "PE",
       "tipo": "NOTICIAS",
       "titulo": "Prohibición de Negocios con los Países Sancionados",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#news"
     },
     {
       "pais": "PE",
       "tipo": "EVENTOS",
       "titulo": "16 Aniversario DXN Perú",
       "fecha": "20 Sep 2026",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#nino-latestBlog"
     },
     {
       "pais": "PE",
       "tipo": "EVENTOS",
       "titulo": "Camp EVOLUCIONA Brasil 2027",
       "fecha": "11 Ene 2027",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419"
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#nino-latestBlog"
     }
   ]
 }
