@@ -9,7 +9,7 @@
     {
       "pais": "PE",
       "tipo": "AVISO",
-      "titulo": "¡COMUNICADO OFICIAL!",
+      "titulo": "Ajuste de Precios a partir del 01 Set 2026",
       "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#news"
     },
     {
@@ -20,16 +20,16 @@
     },
     {
       "pais": "PE",
-      "tipo": "NOTICIAS",
-      "titulo": "Prohibición de Negocios con los Países Sancionados",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#news"
-    },
-    {
-      "pais": "PE",
       "tipo": "EVENTOS",
       "titulo": "16 Aniversario DXN Perú",
       "fecha": "20 Sep 2026",
       "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#nino-latestBlog"
+    },
+    {
+      "pais": "PE",
+      "tipo": "NOTICIAS",
+      "titulo": "Prohibición de Negocios con los Países Sancionados",
+      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#news"
     },
     {
       "pais": "PE",
