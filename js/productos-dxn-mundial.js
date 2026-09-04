@@ -21,6 +21,9 @@
     medio_oriente:["AE","SA","QA","KW","BH","OM","JO","IQ","IL","LB","SY","YE"]
   };
 
+  // Lista de países excluidos: PE (Perú), EC (Ecuador), CO (Colombia), BO (Bolivia), AR (Argentina), PA (Panamá), BR (Brasil)
+  const PAISES_EXCLUIDOS = ["PE", "EC", "CO", "BO", "AR", "PA", "BR"];
+
   function detectarRegion(c){
     if(c==="US") return "usa";
     if(c==="CA") return "canada";
@@ -34,28 +37,40 @@
     return "asia";
   }
 
-  function mostrar(codigoPais,nombrePais){
-    const r=detectarRegion(codigoPais);
-    document.getElementById("dxn-region-text").innerHTML=
+  function mostrar(codigoPais, nombrePais){
+    if(!codigoPais) return;
+
+    // Si el país está en la lista de excluidos, aseguramos que el contenedor esté oculto y detenemos el código
+    if(PAISES_EXCLUIDOS.includes(codigoPais.toUpperCase())){
+      const regionBox = document.getElementById("dxn-region-box");
+      if(regionBox) regionBox.style.display = "none";
+      return;
+    }
+
+    const r = detectarRegion(codigoPais);
+    document.getElementById("dxn-region-text").innerHTML =
   `Puedes ver los Productos Disponibles en <strong>${nombrePais}</strong> dando clic en:<br><br>
    <a href="${LINKS[r]}" target="_blank" class="btn color-azuloscuro" style="margin-top:6px">VER PRODUCTOS</a>`;
-    document.getElementById("dxn-flag").innerHTML=
+    
+    document.getElementById("dxn-flag").innerHTML =
       `<img src="https://flagcdn.com/w40/${codigoPais.toLowerCase()}.png" style="border-radius:4px">`;
-    document.getElementById("dxn-region-box").style.display="block";
+    
+    document.getElementById("dxn-region-box").style.display = "block";
   }
 
   /* IPINFO → usa fallback automático con ipapi para obtener el nombre completo */
   fetch("https://ipinfo.io/json?token=ff207427979a44")
-    .then(r=>r.json())
-    .then(d=>{
+    .then(r => r.json())
+    .then(d => {
       fetch("https://ipapi.co/json/")
-        .then(r=>r.json())
-        .then(p=>mostrar(d.country,p.country_name));
+        .then(r => r.json())
+        .then(p => mostrar(d.country, p.country_name))
+        .catch(() => mostrar(d.country, d.country)); // Fallback si ipapi falla
     })
-    .catch(()=>{
+    .catch(() => {
       fetch("https://ipapi.co/json/")
-        .then(r=>r.json())
-        .then(p=>mostrar(p.country_code,p.country_name));
+        .then(r => r.json())
+        .then(p => mostrar(p.country_code, p.country_name));
     });
 
-  })();
+})();
