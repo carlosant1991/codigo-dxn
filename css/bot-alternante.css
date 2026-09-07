@@ -10,3 +10,10 @@ iframe[title*="Chatling"].chtl-open,
 #chtl-window {
   display: block !important;
 }
+
+/* Ocultar únicamente el botón/burbuja flotante propio de Chatling */
+#chtl-button,
+[id^="chtl-button"],
+.chtl-bubble-icon {
+  display: none !important;
+}
