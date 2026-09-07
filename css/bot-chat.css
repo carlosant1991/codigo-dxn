@@ -1,0 +1,19 @@
+/* Ocultar el botón flotante original de Chatling para evitar duplicados */
+#chtl-container,
+div[id^="chtl-"],
+iframe[title*="Chatling"] {
+  display: none !important;
+}
+
+/* Permitir que solo se vea cuando la ventana del chat está abierta */
+iframe[title*="Chatling"].chtl-open,
+#chtl-window {
+  display: block !important;
+}
+
+/* Ocultar únicamente el botón/burbuja flotante propio de Chatling */
+#chtl-button,
+[id^="chtl-button"],
+.chtl-bubble-icon {
+  display: none !important;
+}
