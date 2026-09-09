@@ -1,0 +1,37 @@
+/* =========================================================
+   BOTÓN FLOTANTE ÚNICAMENTE PARA WHATSAPP
+   ========================================================= */
+
+#chat-dxn-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background-color: #25D366;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99999;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-decoration: none;
+}
+
+#chat-dxn-btn:hover {
+  transform: scale(1.08);
+  background-color: #128C7E;
+}
+
+#chat-dxn-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+}
+
+/* Ocultar cualquier menú flotante previo si ya no se utiliza */
+#chat-dxn-menu {
+  display: none !important;
+}
