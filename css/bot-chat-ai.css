@@ -1,0 +1,38 @@
+/* =========================================================
+   OCULTAR BURBUJA FLOTANTE NATIVA DE DENSER.AI
+   ========================================================= */
+
+/* Ocultar el botón flotante original de Chatling y Denser.ai para evitar duplicados */
+#chtl-container,
+div[id^="chtl-"],
+iframe[title*="Chatling"],
+div[class*="denser-embed"],
+div[id*="denser-embed"],
+button[aria-label*="denser"],
+.denser-chat-button,
+.denser-bubble {
+  display: none !important;
+}
+
+/* Ocultar la burbuja o iframe inactivo de Denser.ai */
+iframe[src*="denser.ai"]:not([class*="open"]):not([class*="active"]) {
+  display: none !important;
+}
+
+/* Ocultar únicamente la burbuja flotante propia de Chatling */
+#chtl-button,
+[id^="chtl-button"],
+.chtl-bubble-icon {
+  display: none !important;
+}
+
+/* Permitir que solo se vea la ventana del chat cuando esté abierta */
+iframe[title*="Chatling"].chtl-open,
+#chtl-window,
+iframe[src*="denser.ai"].denser-open,
+iframe[src*="denser.ai"][style*="display: block"],
+div[class*="denser-chat-window"],
+div[class*="denser-widget-open"] {
+  display: block !important;
+  z-index: 999999 !important;
+}
