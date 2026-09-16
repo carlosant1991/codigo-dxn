@@ -76,7 +76,7 @@ a.style.opacity="0";
 
 setTimeout(()=>a.remove(),1000);
 
-},7000);
+},5000);
 
 
 sessionStorage.setItem("mensajeDXN","true");
