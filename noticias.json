@@ -32,15 +32,6 @@
       "pais": "PE",
       "region": "LATAM",
       "idioma": "es",
-      "tipo": "EVENTOS",
-      "titulo": "16 Aniversario DXN Perú",
-      "fecha": "20 Sep 2026",
-      "url": "https://www.dxn2ulatam.com/newsevent/?lang=es-419#nino-latestBlog"
-    },
-    {
-      "pais": "PE",
-      "region": "LATAM",
-      "idioma": "es",
       "tipo": "NOTICIAS",
       "titulo": "Prohibición de Negocios con los Países Sancionados",
       "fecha": "",
@@ -295,11 +286,19 @@
       "region": "GLOBAL",
       "idioma": "en",
       "tipo": "NEWS",
+      "titulo": "DXN Holdings Bhd Stock Quote & Performance on Bursa Malaysia",
+      "fecha": "Updated Today (Real-Time)",
+      "url": "https://www.google.com/finance/quote/DXN:KLSE"
+    },    
+    {
+      "pais": "GLOBAL",
+      "region": "GLOBAL",
+      "idioma": "en",
+      "tipo": "NEWS",
       "titulo": "DXN Engages MSWG to Deepen Dialogue with Minority Shareholders",
       "fecha": "17 Aug 2026",
       "url": "https://www.dxn2u.com/investor-relations/mediarelease.php?mid=18"
     },
-
     {
       "pais": "GLOBAL",
       "region": "GLOBAL",
@@ -309,7 +308,6 @@
       "fecha": "17 Aug 2026",
       "url": "https://www.dxn2u.com/investor-relations/mediarelease.php?mid=17"
     },
-
     {
       "pais": "GLOBAL",
       "region": "GLOBAL",
@@ -319,7 +317,6 @@
       "fecha": "27 Jul 2026",
       "url": "https://www.dxn2u.com/investor-relations/mediarelease.php?mid=16"
     },
-
     {
       "pais": "GLOBAL",
       "region": "GLOBAL",
@@ -329,7 +326,6 @@
       "fecha": "08 Jun 2026",
       "url": "https://www.dxn2u.com/investor-relations/mediarelease.php?mid=15"
     },
-
     {
       "pais": "GLOBAL",
       "region": "GLOBAL",
