@@ -1,7 +1,6 @@
 /* ==========================================
    BOTÓN Y MENÚ DE WHATSAPP
    ========================================== */
-
 /* Botón flotante */
 #chat-dxn-btn {
   position: fixed;
@@ -32,7 +31,7 @@
   display: none;
   position: fixed;
   bottom: 75px;
-  right: 80px;               /* Se despliega justo arriba del botón de WhatsApp */
+  right: 10px;               /* Se despliega justo arriba del botón de WhatsApp */
   z-index: 9998;
   background: #fff;
   border-radius: 12px;
