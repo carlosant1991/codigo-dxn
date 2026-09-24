@@ -1,11 +1,11 @@
 /* ==========================================
    BOTÓN Y MENÚ DE WHATSAPP
    ========================================== */
-/* Botón flotante */
+/* Botón flotante en Escritorio */
 #chat-dxn-btn {
   position: fixed;
-  bottom: 15px;              /* Alineado en horizontal con el asistente en Escritorio */
-  right: 80px;               /* Posicionado a la izquierda del asistente */
+  bottom: 90px;               /* Subido para que quede arriba del widget de Smartsupp */
+  right: 15px;                /* Alineado en el mismo margen derecho que Smartsupp */
   z-index: 9999;
   background: #25D366;
   color: #fff;
@@ -26,12 +26,12 @@
   transform: scale(1.1);
 }
 
-/* Menú desplegable */
+/* Menú desplegable en Escritorio */
 #chat-dxn-menu {
   display: none;
   position: fixed;
-  bottom: 75px;
-  right: 10px;               /* Se despliega justo arriba del botón de WhatsApp */
+  bottom: 150px;              /* Ubicado por encima del botón de WhatsApp */
+  right: 15px;               /* Alineado en el mismo eje vertical */
   z-index: 9998;
   background: #fff;
   border-radius: 12px;
@@ -66,13 +66,15 @@
 
 /* Ajuste para Móviles (pantallas de 768px o menos) */
 @media (max-width: 768px) {
+  /* Botón posicionado sobre el icono del asistente en móvil */
   #chat-dxn-btn {
-    bottom: 75px;            /* En móviles pasa a estar arriba del asistente */
-    right: 13px;
+    bottom: 90px;            /* Misma distancia o ajustada para pantalla móvil */
+    right: 15px;             /* Alineado a la derecha */
   }
 
+  /* Menú desplegable en móvil */
   #chat-dxn-menu {
-    bottom: 130px;
-    right: 20px;
+    bottom: 150px;           /* Se despliega justo sobre el botón de WhatsApp */
+    right: 15px;
   }
 }
