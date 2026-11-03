@@ -2,7 +2,7 @@ window.addEventListener("load", function () {
     const e = {
         numeroInicial: 22534000,
         fechaInicio: new Date("2026-11-01T05:00:00Z"),
-        crecimientoBasePorHora: 208,
+        crecimientoBasePorHora: 207,
         tiempoMostrado: 6000,
         paises: ["MY", "PE", "BO", "MX", "IN", "PH", "TH"]
     };
