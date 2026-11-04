@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
     const e = {
-        numeroInicial: 22534000,
+        numeroInicial: 22531234,
         fechaInicio: new Date("2026-11-01T05:00:00Z"),
         crecimientoBasePorHora: 207,
         tiempoMostrado: 6000,
