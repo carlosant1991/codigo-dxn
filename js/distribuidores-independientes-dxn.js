@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
     const e = {
         numeroInicial: 22531234,
-        fechaInicio: new Date("2026-11-01T05:00:00Z"), // 00:00 Horas de Lima (UTC-5)
+        fechaInicio: new Date("2026-11-01T05:00:00Z"), // 01 de Noviembre de 2026 a las 00:00 horas de Lima (UTC-5)
         crecimientoBasePorHora: 207,
         tiempoMostrado: 6000,
         paises: ["MY", "PE", "BO", "MX", "IN", "PH", "TH"]
@@ -69,14 +69,12 @@ window.addEventListener("load", function () {
     }
 
     function o() {
-        // CORRECCIÓN GLOBAL: Obtenemos el tiempo UTC actual exacto, ignorando la hora local del celular/PC
-        const ahoraUtc = new Date().getTime();
+        // Estructura original universal: Obtiene el tiempo absoluto UTC y aplica el desfase de Lima
+        const n = new Date(),
+              r = new Date(n.getTime() + 5 * 60 * 60 * 1e3);
         
-        // Ajustamos estrictamente a la hora de Lima (UTC-5 -> sumamos 5 horas en milisegundos para alinear el huso)
-        const r = new Date(ahoraUtc + (new Date().getTimezoneOffset() * 60000) - (5 * 3600 * 1000));
-        
-        const c = (r.getUTCFullYear() - e.fechaInicio.getUTCFullYear()) * 12 + (r.getUTCMonth() - e.fechaInicio.getUTCMonth()),
-              s = e.crecimientoBasePorHora + Math.floor(c / 2);
+        const c = (r.getFullYear() - e.fechaInicio.getUTCFullYear()) * 12 + (r.getUTCMonth() - e.fechaInicio.getUTCMonth()),
+              s = e.crecimientoBasePorHora + Math.floor(c / 2); // Incremento de +1 cada 2 meses
         
         const d = Math.floor(e.numeroInicial + ((r - e.fechaInicio) / 36e5) * s),
               l = document.getElementById("dxn-counter-float");
