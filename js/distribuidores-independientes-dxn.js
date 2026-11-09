@@ -69,33 +69,58 @@ window.addEventListener("load", function () {
     }
 
     function o() {
-        // Estructura original universal: Obtiene el tiempo absoluto UTC y aplica el desfase de Lima
-        const n = new Date(),
-              r = new Date(n.getTime() + 5 * 60 * 60 * 1e3);
-        
-        const c = (r.getFullYear() - e.fechaInicio.getUTCFullYear()) * 12 + (r.getUTCMonth() - e.fechaInicio.getUTCMonth()),
-              s = e.crecimientoBasePorHora + Math.floor(c / 2); // Incremento de +1 cada 2 meses
-        
-        const d = Math.floor(e.numeroInicial + ((r - e.fechaInicio) / 36e5) * s),
-              l = document.getElementById("dxn-counter-float");
-        
-        let f = d - 1e3;
-        const h = Math.ceil((d - f) / 30);
-        let p;
+    // Hora UTC: referencia universal para todos los visitantes
+    const ahora = new Date();
 
-        function u() {
-            f = Math.min(f + h, d);
-            l.innerHTML = "";
-            f.toString().split("").forEach(e => {
-                const n = document.createElement("span");
-                n.textContent = e;
-                l.appendChild(n);
-            });
-            f >= d && (clearInterval(p), t());
+    // Fecha de inicio del contador: 01/11/2026 00:00 de Perú (UTC-5)
+    const inicio = e.fechaInicio;
+
+    // Meses transcurridos según el calendario de Perú
+    const fechaPeru = new Date(ahora.getTime() - 5 * 60 * 60 * 1000);
+    const mesInicioPeru = new Date(inicio.getTime() - 5 * 60 * 60 * 1000);
+
+    const mesesTranscurridos =
+        (fechaPeru.getUTCFullYear() - mesInicioPeru.getUTCFullYear()) * 12 +
+        (fechaPeru.getUTCMonth() - mesInicioPeru.getUTCMonth());
+
+    // Crecimiento: +1 distribuidor por hora cada dos meses
+    const crecimiento =
+        e.crecimientoBasePorHora + Math.floor(mesesTranscurridos / 2);
+
+    // Diferencia de tiempo absoluta, independiente del país
+    const horasTranscurridas = (ahora.getTime() - inicio.getTime()) / 3600000;
+
+    // Número actual de distribuidores
+    const numeroActual = Math.floor(
+        e.numeroInicial + horasTranscurridas * crecimiento
+    );
+
+    const contador = document.getElementById("dxn-counter-float");
+
+    let valor = numeroActual - 1000;
+    const incremento = Math.ceil((numeroActual - valor) / 30);
+
+    let intervalo;
+
+    function animar() {
+        valor = Math.min(valor + incremento, numeroActual);
+
+        contador.innerHTML = "";
+
+        valor.toString().split("").forEach(digito => {
+            const span = document.createElement("span");
+            span.textContent = digito;
+            contador.appendChild(span);
+        });
+
+        if (valor >= numeroActual) {
+            clearInterval(intervalo);
+            t();
         }
-
-        p = setInterval(u, 50);
     }
+
+    intervalo = setInterval(animar, 50);
+}
 
     function i() {
         const t = document.getElementById("dxn-floating-counter");
