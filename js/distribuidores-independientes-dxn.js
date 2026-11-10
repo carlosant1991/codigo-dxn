@@ -1,8 +1,8 @@
 window.addEventListener("load", function () {
     const e = {
-        numeroInicial: 22531234,
+        numeroInicial: 22521234,
         fechaInicio: new Date("2026-11-01T05:00:00Z"), // 01 de Noviembre de 2026 a las 00:00 horas de Lima (UTC-5)
-        crecimientoBasePorHora: 207,
+        crecimientoBasePorHora: 180,
         tiempoMostrado: 6000,
         paises: ["MY", "PE", "BO", "MX", "IN", "PH", "TH"]
     };
